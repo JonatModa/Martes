@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Martes22.Models.Registros>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+
+</p>
+<form method="post">
+    @Html.AntiForgeryToken()
+    Buscar Edad: <input type="number" name="Edad" /> <button>Buscar</button>
+</form>
+
+
+
+
+
+@if (ViewBag.item == null)
+{
+
+
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puesto)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pais)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Puesto)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else{
+
+    <table class="table">
+        @{ List<Martes22.Models.Registros> item = (List<Martes22.Models.Registros>)ViewBag.item; }
+        <tr>
+
+            <th>
+                Nombre
+            </th>
+            <th>
+                Pais
+            </th>
+            <th>
+                Edad
+            </th>
+            <th>
+                Puesto
+            </th>
+        </tr>
+        @foreach(var R in item)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => R.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => R.Pais)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => R.edad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => R.Puesto)
+                        </td>
+                    </tr>
+                }
+    </table>
+    <button class="btn btn btn-light"> @Html.ActionLink("Salir", "Index", "Registros")</button>
+}
